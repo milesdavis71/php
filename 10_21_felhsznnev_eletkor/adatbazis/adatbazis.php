@@ -28,7 +28,7 @@
     if(!$result){
         echo("Hiba a lekérdezés során!");
     } else {
-        // a fetch_assoc egy asszociatív tömbbel tért vissza addig, amíg  => asszociatív => kulcs érték párok.
+        // a fetch_assoc egy asszociatív tömbbel (asszociatív => kulcs érték párok) tér vissza addig, amíg  el nem éri az utolsó sort.
         while($row = $result -> fetch_assoc()){
             //id    nev     klan    nem     suly    magassag
             echo $row['id'].", ";
