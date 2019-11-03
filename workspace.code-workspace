@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "C:\\xampp\\htdocs\\php"
+		},
+		{
+			"name": "php",
+			"path": "C:\\xampp\\php\\ext\\php"
+		},
+		{
+			"name": "php",
+			"path": "."
+		}
+	],
+	"settings": {}
+}
