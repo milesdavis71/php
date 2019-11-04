@@ -1,6 +1,6 @@
 <?php
 // a munkamenet változót a szervertől kapod.
-// 
+// az unsettel csak bizonyos session lehet törölni. Nézz utána
 session_start();
 var_dump($_SESSION);
 if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['q'])) {
