@@ -1,44 +1,22 @@
 <?php
-    // Az adatbázis eléréséhez használt változók.
+// a munkamenet változót a szervertől kapod.
+// 
+session_start();
+var_dump($_SESSION);
+if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['q'])) {
     
-    $host = "localhost";
-    $dbUser = "root";
-    $dbPwd = "";
-    $dbName = "torpetarna";
-    $dbPort = "3306";
+    session_destroy();
+    header('Location: session.php');
+}
+if (isset($_SESSION['szam'])){
+ 
+    $_SESSION['szam']++;
 
-    // Kapcsolódás az adatbázishoz
-    $connect = new mysqli($host, $dbUser, $dbPwd, $dbName, $dbPort);
+}else{
+    $_SESSION['szam'] = 1;
 
-    // -> = „objektum operátor” a bal oldali metódussal elérni a jobb oldali objektumot.
-    if($connect -> errno) {
-        die("Hiba a csatlakozás során!");
-    }
+}
+echo "<br>";
 
-    // karakterkódolás beállítása
-    $connect -> set_charset('utf8');
-
-    // SQL parancs az adatbázisban lévő „torpek” tárna kiolvasására.
-    $sql = "SELECT * FROM torpek";
-    // kiovasott adatok átadása a result változónak
-    $result = $connect -> query($sql);
-    
-    //var_dump($result);
-
-    if(!$result){
-        echo("Hiba a lekérdezés során!");
-    } else {
-        // a fetch_assoc egy asszociatív tömbbel (asszociatív => kulcs érték párok) tér vissza addig, amíg  el nem éri az utolsó sort.
-        while($row = $result -> fetch_assoc()){
-            //id    nev     klan    nem     suly    magassag
-            echo $row['id'].", ";
-            echo $row['nev'].", ";
-            echo $row['klan'].", ";
-            echo $row['nem'].", ";
-            echo $row['suly'].", ";
-            echo $row['magassag']."<br>";
-        }
-    }
-
-    $connect->close();
-?>
+var_dump($_SESSION);
+echo "<a href=\"session.php?q=1\">Törlés</a>";
