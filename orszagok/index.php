@@ -27,6 +27,8 @@
     <!-- select => formban dropdown lista -->
         <select name="continent" id="">
             <?php
+            // a while-ban a result->fetch_array() megtölt egy eredménysort (visszaad egy tömböt) asszociatív (kulcs-érték pár) vagy numerikus tömbként, vagy mindkét módon.
+            // fetch -> utasításkód kiolvasás 
             while ($row = $result -> fetch_array()){
                 echo '<option value="'.$row[0].'">'.$row[1].'</option>';
             }
@@ -52,14 +54,21 @@
     
 
     $connect ->query($sql);
+    // kiovasott adatok átadása a result változónak
     $result = $connect -> query($sql);
+    // Ha a result (boolean) üres, akkor false értéket ad vissza, az if-be viszont
+    // csak akkor lehet belemenni, ha a feltétele true, ezért a false result értéket
+    // meg kell fordítani. 
+    //  
     if (!$result){
         die("Eredménytelen a lekérdezés!");
     }
     echo $result->num_rows." ország felel meg a keresésnek";
     // var_dump($result);
-    // egyed/kapcsolat/tulajdonságok
+    // Egy SQL táblának ez a szintaxisa: egyed/kapcsolat/tulajdonságok
 
+    // Egy while ciklus kiszedi az "orszagok" táblából az adatokat a fetch_assoc-al.
+     
     while ($row = $result -> fetch_assoc()) {
         // echo "".$row['okod']." ".$row['onev']." ".$row["fovaros"]." ".$row['nepesseg']."<br>";
         echo "<tr>";
