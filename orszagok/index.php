@@ -23,17 +23,26 @@
 </head>
 
 <body>
+    <!-- action="#" jelentése: default action, a default mindig a GET -->
     <form action="#">
     <!-- select => formban dropdown lista -->
         <select name="continent" id="">
             <?php
             // a while-ban a result->fetch_array() megtölt egy eredménysort (visszaad egy tömböt) asszociatív (kulcs-érték pár) vagy numerikus tömbként, vagy mindkét módon.
             // fetch -> utasításkód kiolvasás 
+            // $row -> ez egy tömb, ami a $row = $result -> fetch_array() metódusból
+            // jön. A $row id adatbázis sorként azonosítja a tömb értékét,
+            // ezért „$row” a neve. Éppen ezért az adott „row”-ra kétféleképpen
+            // lehet hivatkozni: vagy megadod a kapcsos zárójelen belül idézőjellel
+            // a sor nevét, vagy megadod a sorszámát (1, 2, 3)
+            // ez a while feltölti a select dropdown list-et a "continent" táblából
+            // kiolvasott értékekkel. 
             while ($row = $result -> fetch_array()){
                 echo '<option value="'.$row[0].'">'.$row[1].'</option>';
             }
             ?>
         </select>
+        <!-- a submit-ra történik meg a kontinens szűrés. -->
         <input type ="submit" value="Szűrés">
     </form>
     <table class = "table table-striped">
@@ -48,6 +57,9 @@
         </thead>
     <?php
     $sql = "SELECT * FROM orszagok";
+    // az isset azt nézi, hogy a GET-tel jön-e be valami.
+    // 
+    // 
     if (isset($GET['continent'])) {
         $sql .= " WHERE folrdeszkod=".$GET['continent'];
     }
