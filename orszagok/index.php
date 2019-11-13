@@ -25,7 +25,7 @@
 <body>
     <!-- action="#" jelentése: default action, a default mindig a GET -->
     <form action="#">
-    <!-- select => formban dropdown lista -->
+    <!-- select => formban dropdown lista, option (value) -> a listaelem értéke -->
         <select name="continent" id="">
             <?php
             // a while-ban a result->fetch_array() megtölt egy eredménysort (visszaad egy tömböt) asszociatív (kulcs-érték pár) vagy numerikus tömbként, vagy mindkét módon.

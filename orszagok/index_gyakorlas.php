@@ -23,7 +23,7 @@ if (!$result) {
     <select name="continent" id="">
     <?php
     while ($row = $result -> fetch_array()) {
-        # code...
+        echo '<option value="'.><>'
     }
     ?>
     </select>
