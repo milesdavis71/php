@@ -31,7 +31,7 @@
             // a while-ban a result->fetch_array() megtölt egy eredménysort (visszaad egy tömböt) asszociatív (kulcs-érték pár) vagy numerikus tömbként, vagy mindkét módon.
             // fetch -> utasításkód kiolvasás 
             // $row -> ez egy tömb, ami a $row = $result -> fetch_array() metódusból
-            // jön. A $row id adatbázis sorként azonosítja a tömb értékét,
+            // jön. A $row „id adatbázis sorként” azonosítja a tömb értékét,
             // ezért „$row” a neve. Éppen ezért az adott „row”-ra kétféleképpen
             // lehet hivatkozni: vagy megadod a kapcsos zárójelen belül idézőjellel
             // a sor nevét, vagy megadod a sorszámát (1, 2, 3)

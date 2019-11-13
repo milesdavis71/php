@@ -1,3 +1,14 @@
+<?php
+require_once('connect.php');
+$sql = "SELECT * FROM foldreszek";
+// A -> jelentése: objetkum operátor, az adatbázis objektum területén 
+// az adatbázis eléréséhez a query metódust használja
+$result = $connect -> query($sql);
+if (!$result) {
+    die("hiba");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,6 +22,10 @@
     <form action="#">
     <select name="continent" id="">
     <?php
+    while ($row = $result -> fetch_array()) {
+        # code...
+    }
+    ?>
     </select>
     </form>
 </body>
