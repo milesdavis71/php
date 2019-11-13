@@ -1,11 +1,9 @@
 <?php
-require_once('connect.php');
-$sql = "SELECT * FROM foldreszek";
-// A -> jelentése: objetkum operátor, az adatbázis objektum területén 
-// az adatbázis eléréséhez a query metódust használja
-$result = $connect -> query($sql);
+require_once("connect.php")
+$sql = "SELECT * from foldreszek";
+$result = $connect -> query(sql);
 if (!$result) {
-    die("hiba");
+    die("Hiba a lekérdezésben");
 }
 ?>
 
@@ -22,9 +20,9 @@ if (!$result) {
     <form action="#">
     <select name="continent" id="">
     <?php
-    while ($row = $result -> fetch_array()) {
-        echo '<option value="'.><>'
-    }
+   while ($row = $result -> fetch_array()) {
+       echo '<option value="'.$row[0].'">'.$row[1].'</option>';
+   }
     ?>
     </select>
     </form>

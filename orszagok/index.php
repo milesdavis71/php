@@ -1,7 +1,10 @@
 <?php
     // a connect php-hez csatlakozási lehetőségek:
     // inculde, include_omce. require, require_once
+// 1. adatbázishoz való csatlakozás
     // az utolsó a jó, mert szükséges, de csak egyszer
+    // A -> jelentése: objetkum operátor, az adatbázis objektum területén 
+    // az adatbázis eléréséhez a query metódust használja   
     require_once('connect.php');
     $sql = "SELECT * FROM foldreszek";
     $result = $connect -> query($sql);
@@ -28,6 +31,7 @@
     <!-- select => formban dropdown lista, option (value) -> a listaelem értéke -->
         <select name="continent" id="">
             <?php
+// 2. A kontinensek nevének beinjektálása a select listába
             // a while-ban a result->fetch_array() megtölt egy eredménysort (visszaad egy tömböt) asszociatív (kulcs-érték pár) vagy numerikus tömbként, vagy mindkét módon.
             // fetch -> utasításkód kiolvasás 
             // $row -> ez egy tömb, ami a $row = $result -> fetch_array() metódusból
@@ -56,6 +60,7 @@
         </tr>
         </thead>
     <?php
+// 3. Az országok kiolvasása az adatbázisból és átadása a result-nak
     $sql = "SELECT * FROM orszagok";
     // az isset azt nézi, hogy a GET-tel jön-e be valami.
     // 
@@ -79,8 +84,9 @@
     // var_dump($result);
     // Egy SQL táblának ez a szintaxisa: egyed/kapcsolat/tulajdonságok
 
+// 4. Az adatbázisból kinyert adatok kiíratása a weboldalra egy
+//booststrap ccs táblázatba.
     // Egy while ciklus kiszedi az "orszagok" táblából az adatokat a fetch_assoc-al.
-     
     while ($row = $result -> fetch_assoc()) {
         // echo "".$row['okod']." ".$row['onev']." ".$row["fovaros"]." ".$row['nepesseg']."<br>";
         echo "<tr>";
