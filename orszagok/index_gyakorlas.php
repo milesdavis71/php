@@ -1,9 +1,9 @@
 <?php
-require_once("connect.php")
-$sql = "SELECT * from foldreszek";
-$result = $connect -> query(sql);
+require_once("connect.php");
+$sql = "SELECT * FROM foldreszek";
+$_result = $connect -> query($sql);
 if (!$result) {
-    die("Hiba a lekérdezésben");
+    die ("Hiba a lekérdezésben");
 }
 ?>
 
@@ -13,18 +13,24 @@ if (!$result) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Orszagok</title>
+    <title>Országok</title>
 </head>
 <body>
-    
     <form action="#">
-    <select name="continent" id="">
+    <select name="continent">
     <?php
-   while ($row = $result -> fetch_array()) {
-       echo '<option value="'.$row[0].'">'.$row[1].'</option>';
-   }
+    while ($row = $result -> fetch_array()) {
+        echo '<option value="'.$row[0].'">'.$row[1].'</option>';
+    }
     ?>
     </select>
     </form>
+    <?php
+    $sql = "SELECT * FROM orszagok";
+    if (isset($_GET["continent"]))
+    $sql .= "WHERE foldreszkod=".$_GET['continent'];
+    
+
+    ?>
 </body>
 </html>

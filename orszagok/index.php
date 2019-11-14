@@ -27,28 +27,47 @@
 
 <body>
     <!-- action="#" jelentése: default action, a default mindig a GET -->
-    <form action="#">
-    <!-- select => formban dropdown lista, option (value) -> a listaelem értéke -->
-        <select name="continent" id="">
-            <?php
-// 2. A kontinensek nevének beinjektálása a select listába
-            // a while-ban a result->fetch_array() megtölt egy eredménysort (visszaad egy tömböt) asszociatív (kulcs-érték pár) vagy numerikus tömbként, vagy mindkét módon.
-            // fetch -> utasításkód kiolvasás 
-            // $row -> ez egy tömb, ami a $row = $result -> fetch_array() metódusból
-            // jön. A $row „id adatbázis sorként” azonosítja a tömb értékét,
-            // ezért „$row” a neve. Éppen ezért az adott „row”-ra kétféleképpen
-            // lehet hivatkozni: vagy megadod a kapcsos zárójelen belül idézőjellel
-            // a sor nevét, vagy megadod a sorszámát (1, 2, 3)
-            // ez a while feltölti a select dropdown list-et a "continent" táblából
-            // kiolvasott értékekkel. 
-            while ($row = $result -> fetch_array()){
-                echo '<option value="'.$row[0].'">'.$row[1].'</option>';
-            }
-            ?>
-        </select>
-        <!-- a submit-ra történik meg a kontinens szűrés. -->
-        <input type ="submit" value="Szűrés">
-    </form>
+    <div class="container">
+    <br>
+    <h5 class="text-center"> Országok szűrése kontinens alapján</h5>
+    <hr>
+        <div class="form-group">
+            <form action="#">
+            <!-- select => formban dropdown lista, option (value) -> a listaelem értéke -->
+                <div class="row">
+                    <div class="col3">
+                        <select class="form-control" name="continent" id="">
+                            <?php
+                            // 2. A kontinensek nevének beinjektálása a select listába
+                            // a while-ban a result->fetch_array() megtölt egy eredménysort (visszaad egy tömböt) asszociatív (kulcs-érték pár) vagy numerikus tömbként, vagy mindkét módon.
+                            // fetch -> utasításkód kiolvasás 
+                            // $row -> ez egy tömb, ami a $row = $result -> fetch_array() metódusból
+                            // jön. A $row „id adatbázis sorként” azonosítja a tömb értékét,
+                            // ezért „$row” a neve. Éppen ezért az adott „row”-ra kétféleképpen
+                            // lehet hivatkozni: vagy megadod a kapcsos zárójelen belül idézőjellel
+                            // a sor nevét, vagy megadod a sorszámát (1, 2, 3)
+                            // ez a while feltölti a select dropdown list-et a "continent" táblából
+                            // kiolvasott értékekkel.
+                            while ($row = $result -> fetch_array()){
+                            echo '<option value="'.$row[0].'">'.$row[1].'</option>';
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    
+                    <!-- a submit-ra történik meg a kontinens szűrés. -->
+                    <div class="col-lg-auto">
+                        <button type="submit" class="btn btn-primary">Szűrés</button>
+                    </div>
+                    <div class="col4">
+                    <?php
+                            echo "<p>".$result->num_rows." ország felel meg a keresésnek</p>";
+                            ?>
+                    </div>
+                </div>
+            </form>
+        
+        </div>
     <table class = "table table-striped">
         <thead class="table-dark"> 
         <tr>
@@ -65,12 +84,11 @@
     // az isset azt nézi, hogy a GET-tel jön-e be valami.
     // 
     // 
-    if (isset($GET['continent'])) {
-        $sql .= " WHERE folrdeszkod=".$GET['continent'];
+    if (isset($_GET['continent'])) {
+        $sql .= " WHERE foldreszkod=".$_GET['continent'];
     }
     
 
-    $connect ->query($sql);
     // kiovasott adatok átadása a result változónak
     $result = $connect -> query($sql);
     // Ha a result (boolean) üres, akkor false értéket ad vissza, az if-be viszont
@@ -80,7 +98,6 @@
     if (!$result){
         die("Eredménytelen a lekérdezés!");
     }
-    echo $result->num_rows." ország felel meg a keresésnek";
     // var_dump($result);
     // Egy SQL táblának ez a szintaxisa: egyed/kapcsolat/tulajdonságok
 
@@ -98,5 +115,6 @@
     }
     ?>
 </table>
+</div>
 </body>
 </html>
