@@ -4,7 +4,9 @@
 // 1. adatbázishoz való csatlakozás
     // az utolsó a jó, mert szükséges, de csak egyszer
     // A -> jelentése: objetkum operátor, az adatbázis objektum területén 
-    // az adatbázis eléréséhez a query metódust használja   
+    // az adatbázis eléréséhez a query metódust használja
+    // 2 táblából kell adatokat kiolvasni, először a „foldreszek”-ból,
+    // aztán (később) az „orszagok”-ból.    
     require_once('connect.php');
     $sql = "SELECT * FROM foldreszek";
     $result = $connect -> query($sql);

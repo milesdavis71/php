@@ -1,10 +1,9 @@
 <?php
-require_once("connect.php");
-$sql = "SELECT * FROM foldreszek";
-$_result = $connect -> query($sql);
-if (!$result) {
-    die ("Hiba a lekérdezésben");
-}
+request_once("connect.php");
+$result = $connect -> query($sql);
+if (!$result) 
+    die ('NEm jött létre a kapcsolat');
+
 ?>
 
 <!DOCTYPE html>
@@ -17,20 +16,30 @@ if (!$result) {
 </head>
 <body>
     <form action="#">
-    <select name="continent">
-    <?php
-    while ($row = $result -> fetch_array()) {
-        echo '<option value="'.$row[0].'">'.$row[1].'</option>';
-    }
-    ?>
-    </select>
+        <select name="continent">
+            <?php
+            while ($row = $result -> fetch_array()) {
+                echo '<option value="'.$row[0].'">'.$row[1].'</option>';
+            }
+            ?>
+        </select>
+        <input type="submit">Szűrés</input>
     </form>
+    <table>
     <?php
     $sql = "SELECT * FROM orszagok";
-    if (isset($_GET["continent"]))
-    $sql .= "WHERE foldreszkod=".$_GET['continent'];
-    
+    $request = $connect -> query($sql);
+    while ($row = $result -> fetch_assoc()) {
+        echo "<td>{$row['okod']}</td>";
+        echo "<td>{$row['okod']}</td>";
+        echo "<td>{$row['okod']}</td>";
+        echo "<td>{$row['okod']}</td>";
+    } 
+
 
     ?>
+    
+    </table>
+ 
 </body>
 </html>
