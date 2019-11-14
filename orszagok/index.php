@@ -84,7 +84,7 @@
 // 3. Az országok kiolvasása az adatbázisból és átadása a result-nak
     $sql = "SELECT * FROM orszagok";
     // az isset azt nézi, hogy a GET-tel jön-e be valami.
-    // 
+    // A „.=” összeköti szövegként a bal oldalt a jobbal.
     // 
     if (isset($_GET['continent'])) {
         $sql .= " WHERE foldreszkod=".$_GET['continent'];

@@ -1,45 +1,38 @@
 <?php
-request_once("connect.php");
-$result = $connect -> query($sql);
-if (!$result) 
-    die ('NEm jött létre a kapcsolat');
-
+reqest_omce("connect.php");
+$sql = $result -> query($sql);
+if (!$result) {
+    die ("rossz");
+}
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Országok</title>
+    <title>Document</title>
 </head>
 <body>
-    <form action="#">
-        <select name="continent">
-            <?php
-            while ($row = $result -> fetch_array()) {
-                echo '<option value="'.$row[0].'">'.$row[1].'</option>';
-            }
-            ?>
-        </select>
-        <input type="submit">Szűrés</input>
-    </form>
-    <table>
-    <?php
-    $sql = "SELECT * FROM orszagok";
-    $request = $connect -> query($sql);
-    while ($row = $result -> fetch_assoc()) {
-        echo "<td>{$row['okod']}</td>";
-        echo "<td>{$row['okod']}</td>";
-        echo "<td>{$row['okod']}</td>";
-        echo "<td>{$row['okod']}</td>";
-    } 
+<form action="#">
+<select name="continent">
+<?php
+$sql = "SELECT * from orszagok";
+if (isset($_GET[continent])) {
+    $sql .= "WHERE foldreszkod=".$_GET['continent'];
+}
 
+$result = $connect -> query($sql);
+while ($row = $connect -> fetch_assoc()) {
+    echo "<td>{$row[okod]}</td>";
+}
 
-    ?>
+?>
+
+</table>
+
+</select>
+</form>
     
-    </table>
- 
 </body>
 </html>
