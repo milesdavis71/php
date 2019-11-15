@@ -1,8 +1,9 @@
 <?php
-reqest_omce("connect.php");
-$sql = $result -> query($sql);
+require_once('connect.php');
+$sql = 'SELECT * FROM foldreszek';
+$result = $connect($sql);
 if (!$result) {
-    die ("rossz");
+    die ('hiba');
 }
 ?>
 <!DOCTYPE html>
@@ -14,25 +15,19 @@ if (!$result) {
     <title>Document</title>
 </head>
 <body>
-<form action="#">
-<select name="continent">
+<select name="continent" id="">
 <?php
-$sql = "SELECT * from orszagok";
-if (isset($_GET[continent])) {
-    $sql .= "WHERE foldreszkod=".$_GET['continent'];
-}
+?>
+</select>
 
-$result = $connect -> query($sql);
-while ($row = $connect -> fetch_assoc()) {
-    echo "<td>{$row[okod]}</td>";
+<table>
+<?php
+$sql = "SELECT * FROM orszagok";
+if (isset($_GET['continent'])) {
+    $sql .= "WHERE foldreszkod=". $_GET['continent'];
 }
-
 ?>
 
-</table>
-
-</select>
-</form>
-    
+</table>    
 </body>
 </html>
